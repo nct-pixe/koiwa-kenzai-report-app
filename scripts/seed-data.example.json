@@ -1,0 +1,11 @@
+{
+  "stores": ["本社", "仙台店", "郡山店"],
+  "staff": [
+    { "staffCode": "AZ01", "name": "安齋裕也", "role": "staff", "store": "本社", "pin": "0000" },
+    { "staffCode": "NG01", "name": "長嶺", "role": "staff", "store": "仙台店", "pin": "0000" },
+    { "staffCode": "SD01", "name": "齋藤", "role": "manager", "store": "仙台店", "pin": "0000" },
+    { "staffCode": "TK01", "name": "高橋", "role": "staff", "store": "郡山店", "pin": "0000" },
+    { "staffCode": "NM01", "name": "梨本", "role": "manager", "store": "郡山店", "pin": "0000" },
+    { "staffCode": "HQ01", "name": "本部管理者", "role": "hq", "store": "本社", "pin": "0000" }
+  ]
+}

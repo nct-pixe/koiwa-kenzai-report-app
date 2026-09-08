@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f4f2ee;
+  --surface: #ffffff;
+  --surface-2: #eceae4;
+  --foreground: #232420;
+  --muted: #6b6d66;
+  --line: rgba(35, 36, 32, 0.13);
+  --accent: #b6631f;
+  --accent-ink: #ffffff;
+  --accent-2: #2f5a63;
+  --good: #3f7a4f;
+  --warn: #b6631f;
+  --crit: #ab3a2f;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-2: var(--accent-2);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-crit: var(--crit);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, "Segoe UI", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+/* 数値入力欄の増減矢印（スピンボタン）を非表示にする */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
