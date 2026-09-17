@@ -4,7 +4,7 @@
 //   1. 既存の日報・実績・案件・スタッフ・店舗データを全て削除
 //   2. 既存のSupabase Authユーザーを全て削除
 //   3. 店舗「本社」（headquarters）「会津営業所」（branch）を作成
-//   4. 3名のスタッフアカウントを作成（安斎/梨本/笠原、PINは全員0000）
+//   4. 3名のスタッフアカウントを作成（安齋裕也/梨本康弘/笠原秀幸、PINは全員0000）
 //
 // 使い方:
 //   RESET_CONFIRM=YES-DELETE-ALL-DATA node --env-file=.env.local scripts/reset-and-seed.mjs
@@ -38,9 +38,9 @@ const NEW_STORES = [
 ]
 
 const NEW_STAFF = [
-  { staffCode: 'AZ01', name: '安斎', role: 'staff', store: '会津営業所', pin: '0000' },
-  { staffCode: 'NM01', name: '梨本', role: 'staff', store: '会津営業所', pin: '0000' },
-  { staffCode: 'HQ01', name: '笠原', role: 'hq', store: '本社', pin: '0000' },
+  { staffCode: 'AZ01', name: '安齋裕也', role: 'manager', store: '会津営業所', pin: '0000' },
+  { staffCode: 'NM01', name: '梨本康弘', role: 'staff', store: '会津営業所', pin: '0000' },
+  { staffCode: 'HQ01', name: '笠原秀幸', role: 'hq', store: '本社', pin: '0000' },
 ]
 
 const supabase = createClient(url, serviceRoleKey)
