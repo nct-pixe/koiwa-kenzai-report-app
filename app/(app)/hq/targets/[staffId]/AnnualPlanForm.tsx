@@ -48,9 +48,9 @@ export function AnnualPlanForm({
             <tr className="border-b border-line bg-surface-2 text-left text-xs text-muted">
               <th className="px-3 py-2 font-semibold">月</th>
               <th className="px-3 py-2 text-right font-semibold">前年売上</th>
-              <th className="px-3 py-2 text-right font-semibold">前年利益</th>
+              <th className="px-3 py-2 text-right font-semibold">前年荒利</th>
               <th className="px-3 py-2 text-right font-semibold">今月目標（売上）</th>
-              <th className="px-3 py-2 text-right font-semibold">今月目標（利益）</th>
+              <th className="px-3 py-2 text-right font-semibold">今月目標（荒利）</th>
             </tr>
           </thead>
           <tbody>

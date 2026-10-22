@@ -56,7 +56,7 @@ export function TargetRow({
         <NumberInput name="prevYearSales" defaultValue={prevYearSales} />
       </label>
       <label className="flex flex-col gap-1 text-[11px] text-muted">
-        前年利益
+        前年荒利
         <NumberInput name="prevYearProfit" defaultValue={prevYearProfit} />
       </label>
       <label className="flex flex-col gap-1 text-[11px] text-muted">
@@ -64,7 +64,7 @@ export function TargetRow({
         <NumberInput name="salesTarget" defaultValue={salesTarget} />
       </label>
       <label className="flex flex-col gap-1 text-[11px] text-muted">
-        今月目標（利益）
+        今月目標（荒利）
         <NumberInput name="profitTarget" defaultValue={profitTarget} />
       </label>
       <button

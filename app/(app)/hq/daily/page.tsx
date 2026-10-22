@@ -121,7 +121,7 @@ export default async function HqDailyListPage() {
                     </Link>
                   </td>
                   <td className="px-3 py-2 align-top whitespace-nowrap text-muted" rowSpan={2}>{r.storeName}</td>
-                  <td className="px-3 py-2 font-bold text-foreground">利益</td>
+                  <td className="px-3 py-2 font-bold text-foreground">荒利</td>
                   <td className="px-3 py-2 text-right font-bold tabular-nums">{formatCurrency(r.profitActual)}</td>
                   <td className="px-3 py-2 text-right tabular-nums">
                     {r.profitAchievementPct === null ? '—' : `${r.profitAchievementPct}%`}

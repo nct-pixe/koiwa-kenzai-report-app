@@ -59,7 +59,7 @@ export function PerformanceOverviewTable({ rows }: { rows: StaffPerfRow[] }) {
                 <PctCell cumulative={r.sales.cumulative} target={r.sales.target} prevYear={r.sales.prevYear} />
               </tr>
               <tr className="border-b border-line">
-                <td className="px-2 py-1.5 text-muted">利</td>
+                <td className="px-2 py-1.5 text-muted">荒</td>
                 <td className="px-2 py-1.5 text-right tabular-nums">{formatCurrency(r.profit.prevYear ?? 0)}</td>
                 <td className="px-2 py-1.5 text-right tabular-nums">{formatCurrency(r.profit.target ?? 0)}</td>
                 <td className="px-2 py-1.5 text-right tabular-nums">{formatCurrency(r.profit.cumulative)}</td>

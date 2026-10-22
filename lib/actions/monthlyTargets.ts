@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import { getCurrentStaff, canManageTargets } from '@/lib/auth/currentStaff'
+import { FISCAL_MONTHS, fiscalMonthToCalendarYear } from '@/lib/date'
 import type { PerformanceCategory } from '@/lib/supabase/types'
 
 export interface MonthlyTargetFormState {
@@ -73,11 +74,12 @@ export async function saveAnnualPlan(
     return { error: '不正なリクエストです' }
   }
 
-  const rows = Array.from({ length: 12 }, (_, i) => {
-    const month = i + 1
+  const fiscalYear = Number(year)
+  const rows = FISCAL_MONTHS.map((month) => {
+    const calendarYear = fiscalMonthToCalendarYear(fiscalYear, month)
     return {
       staff_id: targetStaffId,
-      target_month: `${year}-${String(month).padStart(2, '0')}-01`,
+      target_month: `${calendarYear}-${String(month).padStart(2, '0')}-01`,
       category: 'general' as PerformanceCategory,
       sales_target: numberOrZero(formData.get(`m${month}_salesTarget`)),
       profit_target: numberOrZero(formData.get(`m${month}_profitTarget`)),

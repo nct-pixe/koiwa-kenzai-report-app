@@ -12,7 +12,7 @@ export function YearSelect({ value, options, basePath }: { value: string; option
     >
       {options.map((y) => (
         <option key={y} value={y}>
-          {y}年
+          {y}年度
         </option>
       ))}
     </select>

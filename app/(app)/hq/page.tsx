@@ -271,7 +271,7 @@ export default async function HqDashboardPage() {
           </p>
         </div>
         <div className="rounded-lg border border-line bg-surface p-4">
-          <p className="mb-1 text-[11px] text-muted">月間利益目標比</p>
+          <p className="mb-1 text-[11px] text-muted">月間荒利目標比</p>
           <p className="text-lg font-bold tabular-nums">
             {totalProfitTarget ? `${Math.round((totalProfit / totalProfitTarget) * 100)}%` : '—'}
           </p>
@@ -328,7 +328,7 @@ export default async function HqDashboardPage() {
         <div className="rounded-lg border border-line bg-surface p-5">
           <h2 className="mb-4 flex items-center gap-2 text-sm font-bold text-muted">
             <span className="inline-block h-2.5 w-2.5 rounded-full bg-accent" />
-            営業所別 利益実績比較（縦線＝目標）
+            営業所別 荒利実績比較（縦線＝目標）
           </h2>
           <BarComparisonChart rows={storeProfitChartRows} formatValue={formatCurrency} metric="profit" />
         </div>
@@ -357,7 +357,7 @@ export default async function HqDashboardPage() {
         <div className="rounded-lg border border-line bg-surface p-5">
           <h2 className="mb-4 flex items-center gap-2 text-sm font-bold text-muted">
             <span className="inline-block h-2.5 w-2.5 rounded-full bg-accent" />
-            営業所別ランキング（利益順）
+            営業所別ランキング（荒利順）
           </h2>
           <BarComparisonChart rows={storeProfitRanking} formatValue={formatCurrency} metric="profit" />
         </div>
@@ -374,7 +374,7 @@ export default async function HqDashboardPage() {
         <div className="rounded-lg border border-line bg-surface p-5">
           <h2 className="mb-4 flex items-center gap-2 text-sm font-bold text-muted">
             <span className="inline-block h-2.5 w-2.5 rounded-full bg-accent" />
-            スタッフ別ランキング（利益順・全員）
+            スタッフ別ランキング（荒利順・全員）
           </h2>
           <BarComparisonChart rows={profitRanking} formatValue={formatCurrency} metric="profit" />
         </div>
@@ -405,7 +405,7 @@ export default async function HqDashboardPage() {
             <div>
               <p className="mb-2 inline-flex items-center gap-1 text-[11px] font-bold text-muted">
                 <span className="inline-block h-2 w-2 rounded-full bg-accent" />
-                利益
+                荒利
               </p>
               <BarComparisonChart rows={staffProfitChartRowsByStore.get(storeName) ?? []} formatValue={formatCurrency} metric="profit" />
             </div>
@@ -438,7 +438,7 @@ export default async function HqDashboardPage() {
                     <>
                       <tr key={`${r.id}-profit`} className="border-b border-line/60">
                         <td className="px-3 py-2 align-top whitespace-nowrap" rowSpan={2}>{r.name}</td>
-                        <td className="px-3 py-2 font-bold text-foreground">利益</td>
+                        <td className="px-3 py-2 font-bold text-foreground">荒利</td>
                         <td className="px-3 py-2">
                           {profitPct === null ? (
                             <span className="text-xs text-muted">目標未設定</span>

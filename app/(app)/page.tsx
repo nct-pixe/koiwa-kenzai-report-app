@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { getCurrentStaff } from '@/lib/auth/currentStaff'
-import { getMonthStart, getWeekStart, getWeekDates, getBusinessWeekDates, toISODate, formatJPDate, formatCurrency } from '@/lib/date'
+import { getMonthStart, getWeekStart, getWeekDates, toISODate, formatJPDate, formatCurrency } from '@/lib/date'
 import { ProgressBar } from './_components/ProgressBar'
 
 const REPORT_ITEM_WEEKLY_LIMIT = 5
@@ -19,7 +19,7 @@ export default async function MyPage() {
 
   const nextWeekStart = new Date(weekStart)
   nextWeekStart.setDate(nextWeekStart.getDate() + 7)
-  const nextWeekBusinessDates = getBusinessWeekDates(nextWeekStart)
+  const nextWeekBusinessDates = getWeekDates(nextWeekStart)
 
   const supabase = await createClient()
 
@@ -87,7 +87,7 @@ export default async function MyPage() {
           <p className="text-lg font-bold tabular-nums">{formatCurrency(salesActual)}</p>
         </div>
         <div className="rounded-lg border border-line bg-surface p-4">
-          <p className="mb-1 text-[11px] text-muted">利益実績</p>
+          <p className="mb-1 text-[11px] text-muted">荒利実績</p>
           <p className="text-lg font-bold tabular-nums">{formatCurrency(profitActual)}</p>
         </div>
         <div className="rounded-lg border border-line bg-surface p-4">
@@ -115,7 +115,7 @@ export default async function MyPage() {
             </div>
             <div>
               <div className="mb-1.5 flex justify-between text-xs">
-                <span className="text-muted">利益</span>
+                <span className="text-muted">荒利</span>
                 <span className="tabular-nums">{formatCurrency(profitActual)} / {formatCurrency(profitTarget)}</span>
               </div>
               <ProgressBar ratio={profitTarget ? profitActual / profitTarget : 0} />

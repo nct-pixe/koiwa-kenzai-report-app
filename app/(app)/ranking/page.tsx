@@ -46,7 +46,7 @@ export default async function RankingPage({
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="mb-1 text-lg font-bold">営業成績ランキング</h1>
-          <p className="text-sm text-muted">利益実績（累計）順。売上は利益に紐づけて表示します。</p>
+          <p className="text-sm text-muted">荒利実績（累計）順。売上は荒利に紐づけて表示します。</p>
         </div>
         <MonthSelect value={targetMonth} options={monthOptions} basePath="/ranking" />
       </div>
@@ -76,7 +76,7 @@ export default async function RankingPage({
                       {r.store_name}
                       {r.store_id === staff.storeId && <span className="ml-1.5 text-[10px] font-bold text-accent">あなたの店舗</span>}
                     </td>
-                    <td className="px-3 py-2 font-bold text-foreground">利益</td>
+                    <td className="px-3 py-2 font-bold text-foreground">荒利</td>
                     <td className="px-3 py-2 text-right tabular-nums">{formatCurrency(r.profit_target)}</td>
                     <td className="px-3 py-2 text-right font-bold tabular-nums">{formatCurrency(r.cumulative_profit)}</td>
                     <td className="px-3 py-2 text-right tabular-nums">{r.profit_achievement_pct === null ? '—' : `${r.profit_achievement_pct}%`}</td>
@@ -119,7 +119,7 @@ export default async function RankingPage({
         <div className="rounded-lg border border-line bg-surface p-5">
           <h2 className="mb-4 flex items-center gap-2 text-sm font-bold text-muted">
             <span className="inline-block h-2.5 w-2.5 rounded-full bg-accent" />
-            店舗別 利益比較
+            店舗別 荒利比較
           </h2>
           <BarComparisonChart rows={storeProfitChart} formatValue={formatCurrency} metric="profit" />
         </div>
@@ -162,7 +162,7 @@ export default async function RankingPage({
                       {r.staff_id === staff.id && <span className="ml-1.5 text-[10px] font-bold text-accent">あなた</span>}
                     </td>
                     <td className="px-3 py-2 align-top whitespace-nowrap text-muted" rowSpan={2}>{r.store_name}</td>
-                    <td className="px-3 py-2 font-bold text-foreground">利益</td>
+                    <td className="px-3 py-2 font-bold text-foreground">荒利</td>
                     <td className="px-3 py-2 text-right tabular-nums">{formatCurrency(r.profit_target ?? 0)}</td>
                     <td className="px-3 py-2 text-right font-bold tabular-nums">{formatCurrency(r.cumulative_profit)}</td>
                     <td className="px-3 py-2 text-right tabular-nums">

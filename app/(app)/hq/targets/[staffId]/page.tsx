@@ -4,9 +4,9 @@ import { createClient } from '@/lib/supabase/server'
 import { getCurrentStaff, canManageTargets } from '@/lib/auth/currentStaff'
 import { YearSelect } from './YearSelect'
 import { AnnualPlanForm, type AnnualMonthRow } from './AnnualPlanForm'
+import { FISCAL_MONTHS, getCurrentFiscalYear } from '@/lib/date'
 
 const YEAR_PATTERN = /^\d{4}$/
-const MONTH_LABELS = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
 
 export default async function AnnualPlanPage({
   params,
@@ -23,9 +23,9 @@ export default async function AnnualPlanPage({
 
   const { staffId } = await params
   const requestedYear = (await searchParams).year
-  const currentYear = new Date().getFullYear()
-  const year = requestedYear && YEAR_PATTERN.test(requestedYear) ? requestedYear : String(currentYear)
-  const yearOptions = [currentYear - 1, currentYear, currentYear + 1, currentYear + 2].map(String)
+  const currentFiscalYear = getCurrentFiscalYear(new Date())
+  const year = requestedYear && YEAR_PATTERN.test(requestedYear) ? requestedYear : String(currentFiscalYear)
+  const yearOptions = [currentFiscalYear - 1, currentFiscalYear, currentFiscalYear + 1, currentFiscalYear + 2].map(String)
 
   const supabase = await createClient()
 
@@ -40,22 +40,22 @@ export default async function AnnualPlanPage({
     ? targetStaff.stores[0]?.name
     : (targetStaff.stores as { name: string } | null)?.name
 
+  const fiscalYear = Number(year)
   const { data: targets } = await supabase
     .from('monthly_targets')
     .select('target_month, sales_target, profit_target, prev_year_sales, prev_year_profit')
     .eq('staff_id', staffId)
     .eq('category', 'general')
-    .gte('target_month', `${year}-01-01`)
-    .lte('target_month', `${year}-12-01`)
+    .gte('target_month', `${fiscalYear}-03-01`)
+    .lte('target_month', `${fiscalYear + 1}-02-01`)
 
   const byMonth = new Map((targets ?? []).map((t) => [t.target_month.slice(5, 7), t]))
 
-  const rows: AnnualMonthRow[] = MONTH_LABELS.map((label, i) => {
-    const month = i + 1
+  const rows: AnnualMonthRow[] = FISCAL_MONTHS.map((month) => {
     const t = byMonth.get(String(month).padStart(2, '0'))
     return {
       month,
-      label,
+      label: `${month}月`,
       salesTarget: t?.sales_target ?? null,
       profitTarget: t?.profit_target ?? null,
       prevYearSales: t?.prev_year_sales ?? null,
@@ -74,7 +74,9 @@ export default async function AnnualPlanPage({
             年間計画：{targetStaff.name}
             <span className="ml-2 text-xs font-normal text-muted">（{storeName}）</span>
           </h1>
-          <p className="text-sm text-muted">1月〜12月分の前年実績・今月目標をまとめて入力できます。</p>
+          <p className="text-sm text-muted">
+            {fiscalYear}年度（{fiscalYear}年3月〜{fiscalYear + 1}年2月）分の前年実績・今月目標をまとめて入力できます。
+          </p>
         </div>
         <YearSelect value={year} options={yearOptions} basePath={`/hq/targets/${staffId}`} />
       </div>

@@ -90,7 +90,7 @@ export function PerformanceReportForm({
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <AmountRow label="売上" name="cumulativeSales" target={sales.target} prevYear={sales.prevYear} cumulative={sales.cumulative} />
-        <AmountRow label="利益" name="cumulativeProfit" target={profit.target} prevYear={profit.prevYear} cumulative={profit.cumulative} />
+        <AmountRow label="荒利" name="cumulativeProfit" target={profit.target} prevYear={profit.prevYear} cumulative={profit.cumulative} />
       </div>
 
       {state.error && (

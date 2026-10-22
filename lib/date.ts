@@ -26,11 +26,6 @@ export function getWeekDates(weekStart: Date): Date[] {
   })
 }
 
-/** 月曜始まりで平日5日分（月〜金）の日付配列を返す */
-export function getBusinessWeekDates(weekStart: Date): Date[] {
-  return getWeekDates(weekStart).slice(0, 5)
-}
-
 export function formatJPDate(d: Date): string {
   return `${d.getMonth() + 1}/${d.getDate()}（${WEEKDAY_JA[d.getDay()]}）`
 }
@@ -41,6 +36,20 @@ export function getMonthStart(date: Date): Date {
 
 export function formatCurrency(n: number): string {
   return `¥${n.toLocaleString('ja-JP')}`
+}
+
+/** 年度の月順（3月始まり〜翌2月、決算月2月に対応） */
+export const FISCAL_MONTHS = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2]
+
+/** 年度内の月から、実際の西暦年を返す（1・2月は翌年扱い） */
+export function fiscalMonthToCalendarYear(fiscalYear: number, month: number): number {
+  return month <= 2 ? fiscalYear + 1 : fiscalYear
+}
+
+/** 指定日が属する年度（3月始まり）の開始西暦年を返す */
+export function getCurrentFiscalYear(date: Date): number {
+  const month = date.getMonth() + 1
+  return month <= 2 ? date.getFullYear() - 1 : date.getFullYear()
 }
 
 /** 当月を含む直近 monthsBack ヶ月分の選択肢（新しい月が先頭）を返す */

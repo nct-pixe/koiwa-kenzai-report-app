@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { getCurrentStaff } from '@/lib/auth/currentStaff'
-import { getWeekStart, getWeekDates, getBusinessWeekDates, formatJPDate, toISODate } from '@/lib/date'
+import { getWeekStart, getWeekDates, formatJPDate, toISODate } from '@/lib/date'
 import { DayCard, type DayCardDetail } from './DayCard'
 import { DailyTabs } from './DailyTabs'
 import { ReportItemForm, DeleteReportItemButton } from './ReportItemForm'
@@ -21,8 +21,8 @@ export default async function DailyPage() {
 
   const nextWeekStart = new Date(thisWeekStart)
   nextWeekStart.setDate(nextWeekStart.getDate() + 7)
-  const nextWeekBusinessDates = getBusinessWeekDates(nextWeekStart)
-  const thisWeekBusinessDates = getBusinessWeekDates(thisWeekStart)
+  const nextWeekBusinessDates = getWeekDates(nextWeekStart)
+  const thisWeekBusinessDates = getWeekDates(thisWeekStart)
 
   const supabase = await createClient()
 
@@ -67,8 +67,8 @@ export default async function DailyPage() {
   const lastWeekPlanByDate = new Map((lastWeekPlanItems ?? []).map((p) => [p.plan_date, p.content]))
   const reportItemCount = reportItems?.length ?? 0
 
-  const nextWeekPlanSummary = nextWeekBusinessDates
-    .map((d) => ({ iso: toISODate(d), label: formatJPDate(d), content: planByDate.get(toISODate(d)) ?? '' }))
+  const thisWeekPlanSummary = thisWeekDates
+    .map((d) => ({ iso: toISODate(d), label: formatJPDate(d), content: lastWeekPlanByDate.get(toISODate(d)) ?? '' }))
     .filter((p) => p.content.trim() !== '')
 
   const doTab = (
@@ -78,12 +78,12 @@ export default async function DailyPage() {
       </p>
 
       <div className="mb-4 rounded-lg border border-line bg-surface-2/50 p-3.5">
-        <p className="mb-2 text-xs font-bold text-muted">来週の行動予定（サマリー）</p>
-        {nextWeekPlanSummary.length === 0 ? (
-          <p className="text-sm text-muted">来週の行動予定はまだ入力されていません。</p>
+        <p className="mb-2 text-xs font-bold text-muted">今週の行動予定（サマリー）</p>
+        {thisWeekPlanSummary.length === 0 ? (
+          <p className="text-sm text-muted">今週の行動予定はまだ入力されていません。</p>
         ) : (
           <ul className="flex flex-col gap-1">
-            {nextWeekPlanSummary.map((p) => (
+            {thisWeekPlanSummary.map((p) => (
               <li key={p.iso} className="flex gap-2 text-sm">
                 <span className="w-16 shrink-0 text-muted">{p.label}</span>
                 <span className="flex-1">{p.content}</span>
